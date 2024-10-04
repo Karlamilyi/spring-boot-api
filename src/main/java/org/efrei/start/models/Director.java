@@ -13,31 +13,29 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
-@Table(name = "spectator")
-public class Spectator {
-
+@Table(name = "director")
+public class Director {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "fullname", nullable = false)
+    private String fullname;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "spectator_id")
+    @JoinColumn(name = "director_id") 
     private List<Movie> movies = new ArrayList<>();
-    
 
-    public Spectator() {
+
+    public Director() {
     }
 
-
-    public Spectator(String name) {
-        this.name = name;
+    public Director(String fullname) {
+        this.fullname = fullname;
     }
+
 
     public String getId() {
         return this.id;
@@ -47,14 +45,13 @@ public class Spectator {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFullname() {
+        return this.fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
-
 
     public List<Movie> getMovies() {
         return this.movies;
@@ -63,7 +60,6 @@ public class Spectator {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
 
 
 }
