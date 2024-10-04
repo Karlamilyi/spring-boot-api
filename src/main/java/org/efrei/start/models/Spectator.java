@@ -1,11 +1,18 @@
 package org.efrei.start.models;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -23,9 +30,9 @@ public class Spectator {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private Movie movie;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "spectator_id") // Utilisez cette annotation pour établir une relation unidirectionnelle
+    private List<Movie> movies = new ArrayList<>();
     
 
     public Spectator() {
@@ -52,12 +59,15 @@ public class Spectator {
         this.name = name;
     }
 
-    public Movie getMovie() {
-        return this.movie;
+
+    public List<Movie> getMovies() {
+        return this.movies;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
+    
+
 
 }

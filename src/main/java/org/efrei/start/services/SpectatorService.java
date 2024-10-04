@@ -34,9 +34,16 @@ public class SpectatorService {
 
     public void create(CreateSpectator createSpectator) {
         Spectator spectator = new Spectator();
-        Movie movie = movieService.findById(createSpectator.getMovieId());
-        spectator.setName(createSpectator.getName());
-        spectator.setMovie(movie);
+        spectator.setName(createSpectator.getName());   
+        for (String movieId : createSpectator.getMovieId()) {
+            Movie movie = movieService.findById(movieId);
+            
+            if (movie != null) {
+                spectator.getMovies().add(movie);
+            } else {
+                System.out.println("doesn't exist");
+            }
+        }
         repository.save(spectator);
     }
 

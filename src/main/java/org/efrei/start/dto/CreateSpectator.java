@@ -1,11 +1,13 @@
 package org.efrei.start.dto;
 
+import java.util.List;
+
 public class CreateSpectator {
 
 
     private String name;
 
-    private String movieId;
+    private List<String> movieId;
 
 
     public String getName() {
@@ -16,12 +18,14 @@ public class CreateSpectator {
         this.name = name;
     }
 
-    public String getMovieId() {
+
+    public List<String> getMovieId() {
         return this.movieId;
     }
 
-    public void setMovieId(String movieId) {
+    public void setMovieId(List<String> movieId) {
         this.movieId = movieId;
     }
+    
 
 }
